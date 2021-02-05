@@ -111,8 +111,8 @@ for t in range(1,14):
 
         r_norm = [r_norm]
         r_noisy = [r_noisy]
-        stream_norm = os.popen('perl ./scripts/multi-bleu-detok.perl -lc ./scripts/tmp/r_norm.tmp < ./scripts/tmp/p_norm.tmp')
-        stream_noisy = os.popen('perl ./scripts/multi-bleu-detok.perl -lc ./scripts/tmp/r_noisy.tmp < ./scripts/tmp/p_noisy.tmp')
+        stream_norm = os.popen('perl ./scripts/multi-bleu-detok.perl -lc ./scripts/tmp/'+tmp_file_r_norm+' < ./scripts/tmp/'+tmp_file_p_norm)
+        stream_noisy = os.popen('perl ./scripts/multi-bleu-detok.perl -lc ./scripts/tmp/'+tmp_file_r_noisy+' < ./scripts/tmp/'+tmp_file_p_noisy)
         output_norm = stream_norm.read().split(" ")[2].replace(',', '')
         output_noisy = stream_noisy.read().split(" ")[2].replace(',', '')
         #print(output_norm)
