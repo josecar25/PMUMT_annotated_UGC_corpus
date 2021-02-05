@@ -65,7 +65,7 @@ for t in range(1,t_max):
     
     ##### for ntypes and mix_N4plus experiment ####
 
-    if args.mix_N4plus == 'Y' and t == 4:
+    if exp == 'ntypes' and args.mix_N4plus == 'Y' and t == '4':
         t = '4to6'
 
     ###############################################
@@ -164,15 +164,19 @@ for t in range(1,t_max):
     ci_scores_noisy = (round(ci_scores_noisy[0],3),round(ci_scores_noisy[1],3))
 
     ci_ratio = (round(ci_ratio[0],4),round(ci_ratio[1],4))
+    if exp == '1type':
+        type_exp = " for individual type " + t
+    else:
+        type_exp= " for " + t + " present type(s)"
     print("Multi-Bleu_detok.perl:")
-    print("CI RATIO for system " + system + " for type " + t + " = " + str(ci_ratio) + " total: " +  str(round(((ci_ratio[1]+ci_ratio[0])/2.0),4)) + "±" + str(round(ci_ratio[1]-((ci_ratio[1]+ci_ratio[0])/2.0),4)))
-    print("CI SCORE NORM for system " + system + " for type " + t + " = " + str(ci_scores_norm) + " total: " +  str(round(((ci_scores_norm[1]+ci_scores_norm[0])/2.0),2)) + "±" + str(round(ci_scores_norm[1]-((ci_scores_norm[1]+ci_scores_norm[0])/2.0),2)))
-    print("CI SCORE NOISY for system " + system + " for type " + t + " = " + str(ci_scores_noisy) + " total: " +  str(round(((ci_scores_noisy[1]+ci_scores_noisy[0])/2.0),2)) + "±" + str(round(ci_scores_noisy[1]-((ci_scores_noisy[1]+ci_scores_noisy[0])/2.0),2)))
+    print("CI RATIO for system " + system + type_exp + " = " + str(ci_ratio) + " total: " +  str(round(((ci_ratio[1]+ci_ratio[0])/2.0),4)) + "±" + str(round(ci_ratio[1]-((ci_ratio[1]+ci_ratio[0])/2.0),4)))
+    print("CI SCORE NORM for system " + system + type_exp + " = " + str(ci_scores_norm) + " total: " +  str(round(((ci_scores_norm[1]+ci_scores_norm[0])/2.0),2)) + "±" + str(round(ci_scores_norm[1]-((ci_scores_norm[1]+ci_scores_norm[0])/2.0),2)))
+    print("CI SCORE NOISY for system " + system + type_exp + " = " + str(ci_scores_noisy) + " total: " +  str(round(((ci_scores_noisy[1]+ci_scores_noisy[0])/2.0),2)) + "±" + str(round(ci_scores_noisy[1]-((ci_scores_noisy[1]+ci_scores_noisy[0])/2.0),2)))
     print("-----------------")
     print("SacreBleu --tokenize=intl:")
-    print("CI RATIO for system " + system + " for type " + t + " = " + str(ci_ratio_SB) + " total: " +  str(round(((ci_ratio_SB[1]+ci_ratio_SB[0])/2.0),4)) + "±" + str(round(ci_ratio_SB[1]-((ci_ratio_SB[1]+ci_ratio_SB[0])/2.0),4)))
-    print("CI SCORE NORM for system " + system + " for type " + t + " = " + str(ci_scores_norm_SB) + " total: " +  str(round(((ci_scores_norm_SB[1]+ci_scores_norm_SB[0])/2.0),2)) + "±" + str(round(ci_scores_norm_SB[1]-((ci_scores_norm_SB[1]+ci_scores_norm_SB[0])/2.0),2)))
-    print("CI SCORE NOISY for system " + system + " for type " + t + " = " + str(ci_scores_noisy_SB) + " total: " +  str(round(((ci_scores_noisy_SB[1]+ci_scores_noisy_SB[0])/2.0),2)) + "±" + str(round(ci_scores_noisy_SB[1]-((ci_scores_noisy_SB[1]+ci_scores_noisy_SB[0])/2.0),2)))
+    print("CI RATIO for system " + system + type_exp + " = " + str(ci_ratio_SB) + " total: " +  str(round(((ci_ratio_SB[1]+ci_ratio_SB[0])/2.0),4)) + "±" + str(round(ci_ratio_SB[1]-((ci_ratio_SB[1]+ci_ratio_SB[0])/2.0),4)))
+    print("CI SCORE NORM for system " + system + type_exp + " = " + str(ci_scores_norm_SB) + " total: " +  str(round(((ci_scores_norm_SB[1]+ci_scores_norm_SB[0])/2.0),2)) + "±" + str(round(ci_scores_norm_SB[1]-((ci_scores_norm_SB[1]+ci_scores_norm_SB[0])/2.0),2)))
+    print("CI SCORE NOISY for system " + system + type_exp + " = " + str(ci_scores_noisy_SB) + " total: " +  str(round(((ci_scores_noisy_SB[1]+ci_scores_noisy_SB[0])/2.0),2)) + "±" + str(round(ci_scores_noisy_SB[1]-((ci_scores_noisy_SB[1]+ci_scores_noisy_SB[0])/2.0),2)))
     print("#################")
     print("#################")
     print("#################")
