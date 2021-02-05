@@ -80,6 +80,7 @@ for t in range(1,t_max):
     out_file_ref_noisy = "../" + exp + "/" + system + "/" + t + ".noisy.en"
     out_file_pred_noisy = "../" + exp + "/" + system + "/" + t + ".pred.noisy.en"
 
+
     out_ref_norm = open(out_file_ref_norm, "r")
     out_pred_norm = open(out_file_pred_norm, "r")
 
