@@ -25,4 +25,17 @@ For the *ntypes* experiment:
 > bash get_N_types_scores.sh
 
 
-## Specific files where difference between SacreBleu and Multi-Bleu-detok.perl are notable
+## Specific files where difference between SacreBleu and Multi-Bleu-detok.perl are most notable
+
+> cat 1type/TX/3.pred.noisy.en | sacrebleu --tokenize=intl 1type/TX/3.noisy.en
+> BLEU+case.mixed+numrefs.1+smooth.exp+tok.intl+version.1.4.9 = 33.2 62.2/40.7/28.2/20.0 (BP = 0.960 ratio = 0.961 hyp_len = 1809 ref_len = 1882)
+
+> scripts/multi-bleu-detok.perl -lc 1type/TX/3.noisy.en < 1type/TX/3.pred.noisy.en
+> BLEU = 28.78, 62.9/38.0/24.6/15.8 (BP=0.928, ratio=0.931, hyp_len=1527, ref_len=1641)
+
+
+> cat 1type/TX/3.pred.norm.en | sacrebleu --tokenize=intl 1type/TX/3.norm.en
+> BLEU+case.mixed+numrefs.1+smooth.exp+tok.intl+version.1.4.9 = 32.4 60.8/39.3/26.9/18.8 (BP = 0.976 ratio = 0.976 hyp_len = 1837 ref_len = 1882)
+
+> scripts/multi-bleu-detok.perl -lc 1type/TX/3.norm.en < 1type/TX/3.pred.norm.en
+> BLEU = 29.36, 61.5/37.7/24.9/16.1 (BP=0.946, ratio=0.948, hyp_len=1555, ref_len=1641)
