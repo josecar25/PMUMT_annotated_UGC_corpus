@@ -65,7 +65,7 @@ for t in range(1,t_max):
     
     ##### for ntypes and mix_N4plus experiment ####
 
-    if args.mix_N4plus == 'Y' and t = 4:
+    if args.mix_N4plus == 'Y' and t == 4:
         t = '4to6'
 
     ###############################################
