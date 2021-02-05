@@ -36,14 +36,14 @@ for t in range(1,14):
     scores_noisy_SB = []
 
 #    system = 'TX'
-    out_file_src_norm = "./" + exp + "/" + system + "/" + t + ".norm.fr"
-    out_file_src_noisy = "./" + exp + "/" + system + "/" + t + ".noisy.fr"
+    out_file_src_norm = "../" + exp + "/" + system + "/" + t + ".norm.fr"
+    out_file_src_noisy = "../" + exp + "/" + system + "/" + t + ".noisy.fr"
 
-    out_file_ref_norm = "./" + exp + "/" + system + "/" + t + ".norm.en"
-    out_file_pred_norm = "./" + exp + "/" + system + "/" + t + ".pred.norm.en"
+    out_file_ref_norm = "../" + exp + "/" + system + "/" + t + ".norm.en"
+    out_file_pred_norm = "../" + exp + "/" + system + "/" + t + ".pred.norm.en"
 
-    out_file_ref_noisy = "./" + exp + "/" + system + "/" + t + ".noisy.en"
-    out_file_pred_noisy = "./" + exp + "/" + system + "/" + t + ".pred.noisy.en"
+    out_file_ref_noisy = "../" + exp + "/" + system + "/" + t + ".noisy.en"
+    out_file_pred_noisy = "../" + exp + "/" + system + "/" + t + ".pred.noisy.en"
 
     out_ref_norm = open(out_file_ref_norm, "r")
     out_pred_norm = open(out_file_pred_norm, "r")
@@ -76,10 +76,10 @@ for t in range(1,14):
             r_norm.append(l[1].replace('\n', ''))
             p_noisy.append(l[2].replace('\n', ''))
             r_noisy.append(l[3].replace('\n', ''))
-        f_p_norm = open('./tmp/p_norm.tmp', 'w')
-        f_r_norm = open('./tmp/r_norm.tmp', 'w')
-        f_p_noisy = open('./tmp/p_noisy.tmp', 'w')
-        f_r_noisy = open('./tmp/r_noisy.tmp', 'w')
+        f_p_norm = open('./scripts/tmp/p_norm.tmp', 'w')
+        f_r_norm = open('./scripts/tmp/r_norm.tmp', 'w')
+        f_p_noisy = open('./scripts/tmp/p_noisy.tmp', 'w')
+        f_r_noisy = open('./scripts/tmp/r_noisy.tmp', 'w')
         f_p_norm.write(''.join(p_norm_MB))
         f_r_norm.write(''.join(r_norm_MB))
         f_p_noisy.write(''.join(p_noisy_MB))
@@ -91,8 +91,8 @@ for t in range(1,14):
 
         r_norm = [r_norm]
         r_noisy = [r_noisy]
-        stream_norm = os.popen('perl multi-bleu-detok.perl -lc tmp/r_norm.tmp < tmp/p_norm.tmp')
-        stream_noisy = os.popen('perl multi-bleu-detok.perl -lc tmp/r_noisy.tmp < tmp/p_noisy.tmp')
+        stream_norm = os.popen('perl ./scripts/multi-bleu-detok.perl -lc ./scripts/tmp/r_norm.tmp < ./scripts/tmp/p_norm.tmp')
+        stream_noisy = os.popen('perl ./scripts/multi-bleu-detok.perl -lc ./scripts/tmp/r_noisy.tmp < ./scripts/tmp/p_noisy.tmp')
         output_norm = stream_norm.read().split(" ")[2].replace(',', '')
         output_noisy = stream_noisy.read().split(" ")[2].replace(',', '')
         #print(output_norm)
