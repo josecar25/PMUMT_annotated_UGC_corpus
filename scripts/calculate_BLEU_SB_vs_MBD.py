@@ -42,7 +42,7 @@ signal.signal(signal.SIGINT, delete_tmp_files_exit)
 if exp == '1type':
     t_max = 14
 elif exp == 'ntypes':
-    if args.mix_N4plus == 'Y'
+    if args.mix_N4plus == 'Y':
         t_max = 5
     else:
         t_max = 7
