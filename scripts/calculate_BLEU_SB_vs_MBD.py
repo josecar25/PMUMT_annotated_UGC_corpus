@@ -9,10 +9,11 @@ import uuid
 import signal
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--experiment", help="choose between [types] and [ntypes]", required=True)
+parser.add_argument("--experiment", help="choose between [1type] and [ntypes]", required=True)
 parser.add_argument("--MT_system", help="choose between [s2s], [c2c] and [TX]", required=True)
 parser.add_argument("--confidence", help="choose the confidence interval (default: 0.95)", type=float, default=0.95)
 parser.add_argument("--number_tirages", help="choose the number of tirages for confidence interval (default: 300)", type=int, default=300)
+parser.add_argument("--mix_N4plus", help="whether to mix N>=4 for the ntypes experiment", default='Y')
 parser.add_argument("--out_file", help="the output .csv files with scores (default ./scores.csv)",  default='./scores')
 args = parser.parse_args()
 
@@ -38,7 +39,15 @@ def delete_tmp_files_exit(signum, frame):
 original_sigint = signal.getsignal(signal.SIGINT)
 signal.signal(signal.SIGINT, delete_tmp_files_exit)
 
-for t in range(1,14):
+if exp == '1type':
+    t_max = 14
+elif exp == 'ntypes':
+    if args.mix_N4plus == 'Y'
+        t_max = 5
+    else:
+        t_max = 7
+
+for t in range(1,t_max):
     t = str(t)
     src_noisy_out = []  # src[count]]
     src_norm_out = []
@@ -53,6 +62,13 @@ for t in range(1,14):
     scores_noisy_MB = []
     scores_norm_SB = []
     scores_noisy_SB = []
+    
+    ##### for ntypes and mix_N4plus experiment ####
+
+    if args.mix_N4plus == 'Y' and t = 4:
+        t = '4to6'
+
+    ###############################################
 
 #    system = 'TX'
     out_file_src_norm = "../" + exp + "/" + system + "/" + t + ".norm.fr"
