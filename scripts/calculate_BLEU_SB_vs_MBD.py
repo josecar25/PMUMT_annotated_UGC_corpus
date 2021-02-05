@@ -7,6 +7,8 @@ import scipy.stats as st
 import os
 import uuid
 import signal
+import pathlib
+path=str(pathlib.Path(__file__).parent.absolute())
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--experiment", help="choose between [1type] and [ntypes]", required=True)
@@ -69,16 +71,15 @@ for t in range(1,t_max):
         t = '4to6'
 
     ###############################################
-
 #    system = 'TX'
-    out_file_src_norm = "../" + exp + "/" + system + "/" + t + ".norm.fr"
-    out_file_src_noisy = "../" + exp + "/" + system + "/" + t + ".noisy.fr"
+    out_file_src_norm = path+ "/../" + exp + "/" + system + "/" + t + ".norm.fr"
+    out_file_src_noisy = path+ "/../" + exp + "/" + system + "/" + t + ".noisy.fr"
 
-    out_file_ref_norm = "../" + exp + "/" + system + "/" + t + ".norm.en"
-    out_file_pred_norm = "../" + exp + "/" + system + "/" + t + ".pred.norm.en"
+    out_file_ref_norm = path +"/../" + exp + "/" + system + "/" + t + ".norm.en"
+    out_file_pred_norm = path + "/../" + exp + "/" + system + "/" + t + ".pred.norm.en"
 
-    out_file_ref_noisy = "../" + exp + "/" + system + "/" + t + ".noisy.en"
-    out_file_pred_noisy = "../" + exp + "/" + system + "/" + t + ".pred.noisy.en"
+    out_file_ref_noisy = path +"/../" + exp + "/" + system + "/" + t + ".noisy.en"
+    out_file_pred_noisy = path +"/../" + exp + "/" + system + "/" + t + ".pred.noisy.en"
 
 
     out_ref_norm = open(out_file_ref_norm, "r")
