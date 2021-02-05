@@ -1,9 +1,12 @@
+import sys
 import argparse
 import sacrebleu
 import random
 import numpy as np
 import scipy.stats as st
 import os
+import uuid
+import signal
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--experiment", help="choose between [types] and [ntypes]", required=True)
@@ -13,11 +16,27 @@ parser.add_argument("--number_tirages", help="choose the number of tirages for c
 parser.add_argument("--out_file", help="the output .csv files with scores (default ./scores.csv)",  default='./scores')
 args = parser.parse_args()
 
+
 exp = args.experiment
 confidence = args.confidence
 tirages = args.number_tirages
 out_file = open(args.out_file + exp + '.csv.', 'w')
 system = args.MT_system
+
+tmp_file_p_norm = str(uuid.uuid4())
+tmp_file_p_noisy = str(uuid.uuid4())
+tmp_file_r_norm = str(uuid.uuid4())
+tmp_file_r_noisy = str(uuid.uuid4())
+
+def delete_tmp_files_exit(signum, frame):
+    os.remove('./scripts/tmp/'+tmp_file_p_norm)
+    os.remove('./scripts/tmp/'+tmp_file_r_norm)
+    os.remove('./scripts/tmp/'+tmp_file_p_noisy)
+    os.remove('./scripts/tmp/'+tmp_file_r_noisy)
+    sys.exit(1)
+
+original_sigint = signal.getsignal(signal.SIGINT)
+signal.signal(signal.SIGINT, delete_tmp_files_exit)
 
 for t in range(1,14):
     t = str(t)
@@ -53,7 +72,7 @@ for t in range(1,14):
 
 #    out_src_noisy = open(out_file_src_noisy, "r")
 #    out_src_norm = open(out_file_src_norm, "r")
-
+    
     for i in range(0,tirages+1):
         p_norm = []
         r_norm = []
@@ -63,6 +82,7 @@ for t in range(1,14):
         r_norm_MB = []
         p_noisy_MB = []
         r_noisy_MB = []
+        
 
         with open(out_file_pred_norm) as f_pred_norm, open(out_file_ref_norm) as f_ref_norm, open(out_file_pred_noisy) as f_pred_noisy, open(out_file_ref_noisy) as f_ref_noisy:
             lines = list(zip(f_pred_norm, f_ref_norm, f_pred_noisy, f_ref_noisy))
@@ -76,10 +96,10 @@ for t in range(1,14):
             r_norm.append(l[1].replace('\n', ''))
             p_noisy.append(l[2].replace('\n', ''))
             r_noisy.append(l[3].replace('\n', ''))
-        f_p_norm = open('./scripts/tmp/p_norm.tmp', 'w')
-        f_r_norm = open('./scripts/tmp/r_norm.tmp', 'w')
-        f_p_noisy = open('./scripts/tmp/p_noisy.tmp', 'w')
-        f_r_noisy = open('./scripts/tmp/r_noisy.tmp', 'w')
+        f_p_norm = open('./scripts/tmp/'+tmp_file_p_norm, 'w')
+        f_r_norm = open('./scripts/tmp/'+tmp_file_r_norm, 'w')
+        f_p_noisy = open('./scripts/tmp/'+tmp_file_p_noisy, 'w')
+        f_r_noisy = open('./scripts/tmp/'+tmp_file_r_noisy, 'w')
         f_p_norm.write(''.join(p_norm_MB))
         f_r_norm.write(''.join(r_norm_MB))
         f_p_noisy.write(''.join(p_noisy_MB))
@@ -146,4 +166,8 @@ for t in range(1,14):
 #    out_src_norm.close()
     out_pred_norm.close()
     out_ref_norm.close()
+    os.remove('./scripts/tmp/'+tmp_file_p_norm)
+    os.remove('./scripts/tmp/'+tmp_file_r_norm)
+    os.remove('./scripts/tmp/'+tmp_file_p_noisy)
+    os.remove('./scripts/tmp/'+tmp_file_r_noisy)
 
