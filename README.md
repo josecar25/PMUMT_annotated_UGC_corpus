@@ -22,7 +22,7 @@ For the *ntypes* experiment:
 
 > bash get_N_types_scores.sh
 
-##Citation
+## Citation
 
 If you found this evaluation framework useful for your research, please cite the following publication:
 
