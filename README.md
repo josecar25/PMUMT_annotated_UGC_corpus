@@ -15,7 +15,7 @@ Python 3 and install requirements by :
 
 ## Getting the scores and ratios
 
-Regarding evaluation, we provide a script that reads the predictions for each of our sample models (*s2s*, *c2c*, *Tx*) in the generated data folders (*1type* and *ntypes*) to compute machine translation scores and robustness ratios for each of our experiments using a 95% confidence interval:
+Regarding evaluation, we provide a script that reads the predictions for each of our sample models (*s2s*, *c2c*, *Tx*) in the generated data folders (*1type* and *ntypes*, named as **X.norm/noisy.pred_SYSTEM.en**) to compute machine translation scores and robustness ratios for each of our experiments using a 95% confidence interval:
 
 For the *1type* experiment:
 
