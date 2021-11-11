@@ -2,9 +2,11 @@
 
 ## Dataset
 
-The files *norms.fr/en* contain all the combinations of errors annotated in *corpus_generation/annotations.fr/en* that are found in the original noisy data in *corpus_generation/crapbank_annotated.fr/en*, the former containing a series of csv, where the specificity index and span are annotated for each occurrence, and each line contains a sentence.
+The files *norms.fr/en* contain all the combinations of errors annotated in *corpus_generation/annotations.fr/en* that are found in the original noisy data in *corpus_generation/crapbank_annotated.fr/en*, the former containing a series of csv, where the specificity index, correxponding normalization and span are annotated for each occurrence, and each line contains a sentence.
 
 By running generate_datasets_by_types.sh generate_datasets_ntypes.sh, we output the folders **1type** and **ntypes** respectively, the former contains the files with **only one** UGC specificity (indicated by X.noisy.fr/en) and the latter **N differents specificities**.
+
+The file *errors.fr* contains the diferent errors presented for each sentence (each line) of the FR source corpus with all the different specifities' combinations (*norms.fr*).
 
 ## Requirements
 
@@ -13,7 +15,7 @@ Python 3 and install requirements by :
 
 ## Getting the scores and ratios
 
-Regarding evaluation, we provide a script that reads the predictions for each of our sample models (*s2s*, *c2c*, *Tx*) in the generated data folders (*1type* and *ntypes*) to compute machine translation scores and robustness ratios for each of our experiments:
+Regarding evaluation, we provide a script that reads the predictions for each of our sample models (*s2s*, *c2c*, *Tx*) in the generated data folders (*1type* and *ntypes*) to compute machine translation scores and robustness ratios for each of our experiments using a 95% confidence interval:
 
 For the *1type* experiment:
 
